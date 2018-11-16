@@ -33,11 +33,6 @@ public class DoubleClick implements View.OnClickListener {
    */
   private int clicks;
 
-  /*
-   * Flag to check if click handler is busy.
-   */
-  private boolean isBusy = false;
-
   /**
    * Builds a DoubleClick.
    *
@@ -49,14 +44,8 @@ public class DoubleClick implements View.OnClickListener {
 
   @Override
   public void onClick(final View view) {
-
-    if (!isBusy) {
-      //  Prevent multiple click in this short time
-      isBusy = true;
-
       // Increase clicks count
       clicks++;
-
       mHandler.postDelayed(new Runnable() {
         public final void run() {
 
@@ -72,8 +61,6 @@ public class DoubleClick implements View.OnClickListener {
           clicks = 0;
         }
       }, DOUBLE_CLICK_INTERVAL);
-      isBusy = false;
-    }
-
+     
   }
 }
